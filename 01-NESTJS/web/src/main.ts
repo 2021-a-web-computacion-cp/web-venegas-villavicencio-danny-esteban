@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { publish } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieParser = require('cookie-parser');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -10,22 +11,23 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.use(express.static('publico')); //servidor web estático
-  app.use(cookieParser('cookie secreta ejesto')); //secreto cookies
+  const app: any = await NestFactory.create(AppModule);
+  app.set('view engine', 'ejs');
+
+  app.use(express.static('publico'));
+  app.use(cookieParser('Me agradan los poliperros'));
   app.use(
-    //session
+    //Session
     session({
       name: 'server-session-id',
-      secret: 'Este es el mensaje secreto',
+      secret: 'No sera de tomar un traguito',
       resave: true,
-      saveUnitialized: true,
+      saveUninitialized: true,
       cookie: { secure: false },
       store: new FileStore(),
     }),
   );
-
-  await app.listen(3000); //puerto
+  await app.listen(3000);
 }
 bootstrap();
 /*

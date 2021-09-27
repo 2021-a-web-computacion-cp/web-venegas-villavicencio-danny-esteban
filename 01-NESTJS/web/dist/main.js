@@ -8,13 +8,14 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.set('view engine', 'ejs');
     app.use(express.static('publico'));
-    app.use(cookieParser('cookie secreta ejesto'));
+    app.use(cookieParser('Me agradan los poliperros'));
     app.use(session({
         name: 'server-session-id',
-        secret: 'Este es el mensaje secreto',
+        secret: 'No sera de tomar un traguito',
         resave: true,
-        saveUnitialized: true,
+        saveUninitialized: true,
         cookie: { secure: false },
         store: new FileStore(),
     }));
