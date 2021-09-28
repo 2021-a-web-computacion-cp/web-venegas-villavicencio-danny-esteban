@@ -1,0 +1,63 @@
+<%- include('../comunes/cabecera') %>
+<div class='container'>
+    <% const existeMensaje = typeof datos.mensaje !== 'undefined'%>
+    <% if(existeMensaje){%>
+        <div class="alert alert-danger" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+    <h1>Lista de Aerolineas</h1>
+    <form action=" /aero/lista-aerolinea" method="get">
+        <div class="mb-3">
+            <label for="busqueda" class="form-label">BUSQUEDA </label>
+            <input placeholder="Ej: Tame" type="text" name="busqueda" class="form-control" id="busqueda" aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-text"> Puede buscar por Nombre de la Aerolinea o el pais de origen. </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </form>
+    <div class="d-flex justify-content-end">
+        <a href="/aero/vista-crear">
+            <button class="btn btn-success btn-lg ">Crear Aerolinea</button>
+        </a>
+    </div>
+    <table class="table text-center" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Año Creacion</th>
+            <th scope="col">Activa</th>
+            <th scope="col">N. Vuelos</th>
+            <th scope="col">Pais Origen</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% datos.aerolinea.forEach((objeto) => { %>
+            <tr>
+                <th><%= objeto.id %></th>
+                <th><%= objeto.nombreair %></th>
+                <th><%= objeto.anio_creacion %></th>
+                <th><%= objeto.activa %></th>
+                <th><%= objeto.vuelo %></th>
+                <th><%= objeto.pais_origen %></th>
+                <th>
+                    <form action="/aero/eliminar-aerolinea/<%= objeto.id %>" method="post">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </th>
+                <th>
+                    <a href="/aero/vista-editar/<%= objeto.id %>">
+                        <button class="btn btn-secondary">
+                            Editar
+                        </button>
+                    </a>
+                </th>
+            </tr>
+        <% } ) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../comunes/footer') %>

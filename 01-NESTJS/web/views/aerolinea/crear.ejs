@@ -1,0 +1,45 @@
+<%- include('../comunes/cabecera') %>
+<div class='container'>
+    <% const existeMensaje = typeof datos.mensaje !== 'undefined'%>
+    <% if(existeMensaje){%>
+        <div class="alert alert-success" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+    <ul>
+        <li><a  href= '/aero/lista-aerolinea'> Regresar a Lista de Aerolineas</a></li>
+    </ul>
+    <h1 style="text-align:center">Crear Aerolinea</h1>
+    <form action="/aero/crear-aerolinea-formulario" method="post">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre*</label>
+            <input placeholder="Ej: Tame" type="text" name="nombre" class="form-control" id="nombre" aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-text">Ingrese Nombre</div>
+        </div>
+        <div class="mb-3">
+            <label for="anio" class="form-label">Año Creacion*</label>
+            <input placeholder="Año de Creacion" type="number" name="anio" class="form-control" id="anio"  min="1901" max="2021" aria-describedby="ayudaAnio">
+            <div id="ayudaAnio" class="form-text">Ingrese Año de Creacion</div>
+        </div>
+        <div class="mb-3">
+            <label for="Vuelos" class="form-label">Numero Vuelos*</label>
+            <input placeholder="Ej: 20" type="number" name="vuelo" class="form-control" id="vuelo"  min="1" aria-describedby="ayudaVuelo">
+            <div id="ayudaVuelo" class="form-text">Ingrese los vuelos al dia</div>
+        </div>
+        <div class="mb-3">
+            <label for="activa" class="form-label">Aerolinea Activa*</label>
+            <select id="activa" name="activa">
+                <option value="true">Si</option>
+                <option value="false">No</option>
+            </select>
+            <div id="ayudaAerolinea" class="form-text">Seleccione si la aerolinea se encuentra activa</div>
+        </div>
+        <div class="mb-3">
+            <label for="pais_origen" class="form-label">Pais*</label>
+            <input placeholder="Ej: Estados Unidos" type="text" name="pais_origen" class="form-control" id="pais_origen" aria-describedby="ayudaPais">
+            <div id="ayudaPais" class="form-text">Ingresar Pais de origen</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Crear</button>
+    </form>
+</div>
+<%- include('../comunes/footer') %>

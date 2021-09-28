@@ -22,3 +22,12 @@ model Mascota{
     usuario             EPN_USUARIO @relation(fields: [usuarioId],references:[id])
     usuarioId           Int
 }
+
+model AEROLINEA{
+id                  Int         @id @default(autoincrement())
+nombreair           String
+anio_creacion       Int          @db.Year
+activa              Boolean
+vuelo               Int
+pais_origen         String
+}

@@ -1,4 +1,4 @@
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../Aerolineas/prisma.service';
 import { Prisma } from '@prisma/client';
 export declare class UsuarioService {
     private prisma;

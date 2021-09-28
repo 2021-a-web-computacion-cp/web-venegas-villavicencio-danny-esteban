@@ -4,11 +4,12 @@ import { AppService } from './app.service';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { UsuarioModule } from './usuario/usuario.module';
-
+import { AerolineaModule } from './Aerolineas/aerolinea.module';
 @Module({
   imports: [
     //modulo importados
     UsuarioModule,
+      AerolineaModule
   ],
   controllers: [
     //controladores de este modulo

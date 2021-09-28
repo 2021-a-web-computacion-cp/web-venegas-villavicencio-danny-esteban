@@ -9,58 +9,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsuarioService = void 0;
+exports.AerolineaService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../Aerolineas/prisma.service");
-let UsuarioService = class UsuarioService {
+const prisma_service_1 = require("./prisma.service");
+let AerolineaService = class AerolineaService {
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    buscarUno(id) {
+        return this.prisma.aEROLINEA.findUnique({
+            where: { id: id },
+        });
+    }
+    crearUno(aerolinea) {
+        return this.prisma.aEROLINEA.create({ data: aerolinea });
     }
     buscarMuchos(parametrosBusqueda) {
         const or = parametrosBusqueda.busqueda
             ? {
                 OR: [
-                    { nombre: { contains: parametrosBusqueda.busqueda } },
-                    { apellido: { contains: parametrosBusqueda.busqueda } },
+                    { nombreair: { contains: parametrosBusqueda.busqueda } },
+                    { pais_origen: { contains: parametrosBusqueda.busqueda } },
                 ],
             }
             : {};
-        console.log(or);
-        return this.prisma.ePN_USUARIO.findMany({
+        return this.prisma.aEROLINEA.findMany({
             where: or,
             take: Number(parametrosBusqueda.take) || undefined,
             skip: Number(parametrosBusqueda.skip) || undefined,
         });
     }
-    buscarUno(id) {
-        return this.prisma.ePN_USUARIO.findUnique({
-            where: {
-                id: id,
-            },
-        });
-    }
-    crearUno(usuario) {
-        return this.prisma.ePN_USUARIO.create({
-            data: usuario,
-        });
-    }
     actualizarUno(parametrosActualizar) {
-        return this.prisma.ePN_USUARIO.update({
+        return this.prisma.aEROLINEA.update({
             data: parametrosActualizar.data,
-            where: {
-                id: parametrosActualizar.id,
-            },
+            where: { id: parametrosActualizar.id },
         });
     }
     eliminarUno(id) {
-        return this.prisma.ePN_USUARIO.delete({
+        return this.prisma.aEROLINEA.delete({
             where: { id: id },
         });
     }
 };
-UsuarioService = __decorate([
+AerolineaService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], UsuarioService);
-exports.UsuarioService = UsuarioService;
-//# sourceMappingURL=usuario.service.js.map
+], AerolineaService);
+exports.AerolineaService = AerolineaService;
+//# sourceMappingURL=aerolinea.service.js.map
